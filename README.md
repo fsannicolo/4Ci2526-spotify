@@ -19,3 +19,11 @@ ng new nome-app
 
 > [!TIP]
 > Con la CLI Angular si consiglia l'utilizzo della notazione kebab-case
+
+## Componenti fondamentali
+
+### Estensione per testing API
+REST Client
+
+### Creare account su Spotify
+[Spotify for Developers](https://developer.spotify.com)
