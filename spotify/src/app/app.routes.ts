@@ -1,3 +1,10 @@
 import { Routes } from '@angular/router';
+import { Home } from './home/home';
+import { SearchArtist } from './search-artist/search-artist';
+import { NotFound } from './not-found/not-found';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+    {path: "", component: Home},
+    {path: "search-artist", component: SearchArtist},
+    {path: "**", component: NotFound}   // tutti gli altri percorsi
+];

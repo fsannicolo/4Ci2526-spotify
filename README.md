@@ -27,3 +27,14 @@ REST Client
 
 ### Creare account su Spotify
 [Spotify for Developers](https://developer.spotify.com)
+
+## Componenti aggiuntivi
+
+### Bootstrap
+
+In `angular.json`:
+- "styles": 
+    `"node_modules/bootstrap/dist/css/bootstrap.min.css"`
+
+- "scripts":
+    `"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"`
