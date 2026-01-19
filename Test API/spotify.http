@@ -5,4 +5,8 @@ grant_type=client_credentials&client_id=17ec561e961c4ad2b11a5285ce1b0cdf&client_
 ###
 
 GET https://api.spotify.com/v1/search?q=bellofigo&type=artist 
-Authorization: Bearer BQBL7DkZX3byn2HPLFVT_GArqRnOFYalrKZZ2sxKkXtNwd57MbGBO7xJ4nRrKoyemvFQc2MeFOuY1jgRKP03mac8CdITULal9N9bKT3Nkwwsi7ebPja2IPL_CP_5tdG3dCc2_jCHEAg'
+Authorization: Bearer BQA8JbL_mCW-ccDX0AnuMyztI9dihOao-Z3nyHyzlPsLmQb428aNhEb6ofYZ5fuQ4bmNkmqLHkJVm7YiN7I54yBNVYSFeO4ehRclXVJgI59Rz00A2S3zDefrOISdQZ3dpVEmh7-Ymu4'
+###
+
+GET https://api.spotify.com/v1/artists/1dfeR4HaWDbWqFHLkxsg1d
+Authorization: Bearer BQA8JbL_mCW-ccDX0AnuMyztI9dihOao-Z3nyHyzlPsLmQb428aNhEb6ofYZ5fuQ4bmNkmqLHkJVm7YiN7I54yBNVYSFeO4ehRclXVJgI59Rz00A2S3zDefrOISdQZ3dpVEmh7-Ymu4

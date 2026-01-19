@@ -3,6 +3,7 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { IToken } from './interfaces/i-token';
 import { interval, Observable } from 'rxjs';
 import { ISearchedArtists } from './interfaces/i-searched-artists';
+import { IArtist } from './interfaces/i-artist';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class SpotifyService {
   private client_secret: string = 'b8c0aefe05c749dfa6e7e1d185c3dbdf';
   private urls: string[] = [
     'https://accounts.spotify.com/api/token',
-    'https://api.spotify.com/v1/search?q='
+    'https://api.spotify.com/v1/search?q=',
+    'https://api.spotify.com/v1/artists/'
   ];
 
   // ! operatore asserzione tipo non nullo
@@ -54,5 +56,13 @@ export class SpotifyService {
     let httpHeader = new HttpHeaders().set('Authorization', this._token.token_type + ' ' + this._token.access_token);
 
     return this.httpClient.get<ISearchedArtists>(url, { headers: httpHeader });
+  }
+
+  getArtist(id: string): Observable<IArtist> {
+    let url = `${this.urls[2]}/${id}`;
+    let httpHeader = new HttpHeaders()
+    .set('Authorization', this._token.token_type + ' ' + this._token.access_token);
+
+    return this.httpClient.get<IArtist>(url, {headers: httpHeader})
   }
 }
