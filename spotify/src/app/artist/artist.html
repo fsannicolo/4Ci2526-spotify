@@ -1,1 +1,26 @@
-<p>artist works!</p>
+<div class="row">
+    <div class="col-sm-4">
+        <div>
+            @if(artist()?.images) {
+                <img class="img-fluid" [src]="artist()!.images[0].url" [alt]="artist()?.name"> 
+            }
+            @else {
+                <p>{{artist()!.name}}</p>
+            }
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div>
+            <h4 class="display-4">
+                {{artist()?.name}}
+            </h4>
+            <p class="lead">
+                Popolarità: {{artist()?.popularity}}
+            <br>
+                Generi: {{genres}}
+            <br>
+                Followers: {{artist()?.followers?.total}}
+            </p>
+        </div>
+    </div>
+</div>
