@@ -4,6 +4,8 @@ import { IToken } from './interfaces/i-token';
 import { interval, Observable } from 'rxjs';
 import { ISearchedArtists } from './interfaces/i-searched-artists';
 import { IArtist } from './interfaces/i-artist';
+import { IAlbum } from './interfaces/i-album';
+import { ITracks } from './interfaces/i-tracks';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,8 @@ export class SpotifyService {
   private urls: string[] = [
     'https://accounts.spotify.com/api/token',
     'https://api.spotify.com/v1/search?q=',
-    'https://api.spotify.com/v1/artists/'
+    'https://api.spotify.com/v1/artists/',
+    'https://api.spotify.com/v1/albums/'
   ];
 
   // ! operatore asserzione tipo non nullo
@@ -64,5 +67,21 @@ export class SpotifyService {
     .set('Authorization', this._token.token_type + ' ' + this._token.access_token);
 
     return this.httpClient.get<IArtist>(url, {headers: httpHeader})
+  }
+
+  getAlbums(id: string): Observable<IAlbum> {
+    let url = `${this.urls[2]}/${id}/albums`;
+    let httpHeader = new HttpHeaders()
+    .set('Authorization', this._token.token_type + ' ' + this._token.access_token);
+
+    return this.httpClient.get<IAlbum>(url, {headers: httpHeader})
+  }
+
+  getTracks(id: string): Observable<ITracks> {
+    let url = `${this.urls[3]}/${id}`;
+    let httpHeader = new HttpHeaders()
+    .set('Authorization', this._token.token_type + ' ' + this._token.access_token);
+
+    return this.httpClient.get<ITracks>(url, {headers: httpHeader})
   }
 }

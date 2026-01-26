@@ -1,0 +1,7 @@
+<div class="row">
+    @for(album of albums(); track album.id) {
+        <div class="col-sm-3 my-3">
+            <app-album-card [album]="album"></app-album-card>
+        </div>
+    }
+</div>

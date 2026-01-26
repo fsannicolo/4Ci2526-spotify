@@ -1,0 +1,11 @@
+@if(album()?.images) {
+    <div class="card">    
+        <a [routerLink]="['/album', album()?.id]">
+            <img [src]="albumImage" class="card-img-top" alt="album()?.name">
+        </a>
+        <div class="card-body">
+            <p class="card-text">{{album()?.name}}</p>
+        </div>
+    </div>
+}
+    

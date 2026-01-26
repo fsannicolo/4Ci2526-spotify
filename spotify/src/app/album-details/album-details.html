@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-sm-4">
+        <div>
+            <img class="img-fluid img-thumbnail" [src]="imageName" [alt]="tracks()?.name">
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div>
+            <h4 class="display-4">{{tracks()?.name}}</h4>
+        </div>
+        <div>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Duration</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(tr of tracks()?.tracks?.items; track tr.id){
+                        <tr>
+                            <th scope="row">{{$index}}</th>
+                            <td>{{tr.name}}</td>
+                            <td>{{trackDuration(tr.duration_ms)}}</td>                            
+                        </tr>
+                    }                     
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
