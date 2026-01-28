@@ -29,8 +29,19 @@ export class AlbumDetails implements OnInit {
     return this.tracks()?.images[0] ? this.tracks()!.images[0].url : 'favicon.ico';
   }
 
+  get artist(): string {
+    return this.tracks()?.artists ? this.tracks()!.artists.map(artist => artist.name).join(', ') : '';
+  }
+
+  formatDate(date: string): string {
+    let d = new Date(date);
+    return d.toLocaleDateString();
+  }
+
   trackDuration(durationMs: number): string {
     let duration = durationMs / 1000;
-    return Math.floor(duration / 60) + ':' + duration % 60;
+    let minutes = Math.floor(duration / 60);
+    let seconds = duration % 60 < 10 ? '0' + Math.floor(duration % 60) : Math.floor(duration % 60)
+    return minutes + ':' + seconds;
   }
 }

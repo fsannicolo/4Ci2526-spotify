@@ -2,6 +2,15 @@
     <div class="col-sm-4">
         <div>
             <img class="img-fluid img-thumbnail" [src]="imageName" [alt]="tracks()?.name">
+            <p class="lead mt-3">
+                <b>{{artist}}</b>
+            </p>
+            <p class="lead">
+                {{tracks()?.total_tracks}} tracks
+            </p>
+            <p>
+                Data di uscita: {{tracks() ? formatDate(tracks()!.release_date) : "No data"}}
+            </p>
         </div>
     </div>
     <div class="col-sm-8">
@@ -9,7 +18,7 @@
             <h4 class="display-4">{{tracks()?.name}}</h4>
         </div>
         <div>
-            <table class="table table-sm">
+            <table class="table table-sm mt-5">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

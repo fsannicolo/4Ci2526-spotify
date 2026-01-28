@@ -14,3 +14,12 @@ Authorization: Bearer BQA8JbL_mCW-ccDX0AnuMyztI9dihOao-Z3nyHyzlPsLmQb428aNhEb6of
 
 GET https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/albums
 Authorization: Bearer BQCURgly-op0AHrErVfMfoSBjvpMWE48yhD04XMXIRWqHBX4eNUYU33Y5Z3N9l_m2FD-UAo5XhnH5yVFckk6oK7sH4imDhV56e4ckaQ-wm2yOkO8nF9TY8bYAIg-X4rIptfzYRtbueA
+###
+
+POST https://dummyjson.com/user/login
+Content-Type: application/json
+
+{   
+    "username": "emilys",
+    "password": "emilyspass"
+}
