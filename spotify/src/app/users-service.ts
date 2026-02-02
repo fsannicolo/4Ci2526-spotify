@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { IUser } from './interfaces/i-user';
+import { catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,20 +21,36 @@ export class UsersService {
 
   private url: string = 'https://dummyjson.com/user/login';
 
-  login(userName: string, password: string): void {
+  login(username: string, password: string): void {
     let httpHeader = new HttpHeaders().set('Content-Type', 'application/json');
     
     let user: any = {
-      username: userName,
+      username: username,
       password: password
     }
 
-    // TODO
-    this.httpClient.post(this.url, user, {headers: httpHeader}).subscribe();
+    this.httpClient.post<IUser>(this.url, user, {headers: httpHeader}).pipe(
+      map(response => response),
+      catchError(this.handleError)
+    )
+    .subscribe({
+      // status 200
+      next: (data: IUser) => {
+        this._userData.set(data);
+        this._isLogged.set(true);
+      },
+      error: (err: Error) => {
+        this._loginError.set(true);
+      }
+    })
   }
 
   logout(): void {
     this._isLogged.set(false);
     this._userData.set(null);
+  }
+
+  handleError(error: HttpErrorResponse) {    
+    return throwError(() => new Error('Username o password errati'));
   }
 }
