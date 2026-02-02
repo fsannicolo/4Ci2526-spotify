@@ -2,12 +2,14 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { IUser } from './interfaces/i-user';
 import { catchError, map, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
   httpClient: HttpClient = inject(HttpClient);
+  router: Router = inject(Router);
 
   // dati dell'utente ricevuti dal server di autenticazione 
   private _userData: WritableSignal<IUser | null> = signal<IUser | null>(null);
@@ -38,6 +40,7 @@ export class UsersService {
       next: (data: IUser) => {
         this._userData.set(data);
         this._isLogged.set(true);
+        this.router.navigateByUrl("/"); // redirect alla home
       },
       error: (err: Error) => {
         this._loginError.set(true);
