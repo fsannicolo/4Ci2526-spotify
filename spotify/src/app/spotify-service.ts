@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { IToken } from './interfaces/i-token';
 import { interval, Observable } from 'rxjs';
 import { ISearchedArtists } from './interfaces/i-searched-artists';
@@ -28,6 +28,9 @@ export class SpotifyService {
   // ! operatore asserzione tipo non nullo
   private _token!: IToken;
 
+  private _validToken: WritableSignal<boolean> = signal(false);
+  validToken: Signal<boolean> = this._validToken.asReadonly();
+
   public getToken(): void {
     // header della richiesta
     let httpHeader = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
@@ -42,13 +45,16 @@ export class SpotifyService {
     this.httpClient.post<IToken>(this.urls[0], httpParams.toString(), { headers: httpHeader })
       .subscribe((token: IToken) => {
         this._token = token;
+        this._validToken.set(true);
         console.log(this._token);
 
         // quando scade la validità, richiedo un nuovo token
         interval(this._token.expires_in * 1000).subscribe(() => {
+          this._validToken.set(false);
           this.httpClient.post<IToken>(this.urls[0], httpParams.toString(), { headers: httpHeader })
             .subscribe((token: IToken) => {
               this._token = token;
+              this._validToken.set(true);
             })
         })
       });

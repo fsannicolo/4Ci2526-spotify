@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { IUser } from './interfaces/i-user';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, map, throwError, timer } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -44,6 +44,7 @@ export class UsersService {
       },
       error: (err: Error) => {
         this._loginError.set(true);
+        timer(3000).subscribe(() => this._loginError.set(false));
       }
     })
   }
